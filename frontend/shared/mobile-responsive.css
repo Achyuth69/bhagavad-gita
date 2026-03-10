@@ -216,123 +216,162 @@
 @media (max-width: 768px) {
     body {
         background-attachment: scroll;
+        display: flex;
+        align-items: flex-start;
+        padding-top: 60px;
     }
 
     .scroll-container {
-        width: 95vw !important;
+        width: 92vw !important;
         height: auto !important;
-        min-height: 95vh !important;
+        min-height: 85vh !important;
+        max-height: none !important;
         background-size: 100% 100% !important;
-        padding: 40px 0 !important;
+        padding: 50px 0 50px 0 !important;
+        margin: 0 auto;
+        position: relative;
     }
 
     .scroll-content {
-        width: 85% !important;
-        top: 15% !important;
-        gap: 0.8rem !important;
+        width: 80% !important;
+        top: 18% !important;
+        position: absolute;
+        gap: 1rem !important;
+        padding-bottom: 30px;
     }
 
     .form-card {
-        gap: 10px !important;
+        gap: 12px !important;
+        width: 100%;
     }
 
     .form-card input,
     .form-card select {
         width: 100% !important;
         font-size: 16px !important;
-        padding: 12px 8px !important;
+        padding: 14px 10px !important;
+        border-radius: 6px !important;
+        background: rgba(44, 27, 24, 0.05) !important;
     }
 
     .translate-btn,
     button {
-        font-size: 14px !important;
-        padding: 12px 24px !important;
-        margin-top: 15px !important;
+        font-size: 15px !important;
+        padding: 14px 28px !important;
+        margin-top: 18px !important;
+        width: auto !important;
+    }
+
+    .output-section {
+        width: 100%;
+        margin-top: 10px;
     }
 
     #outputText {
-        font-size: 0.95rem !important;
-        line-height: 1.7 !important;
-        padding: 0 15px !important;
-        margin-top: 15px !important;
+        font-size: 1rem !important;
+        line-height: 1.8 !important;
+        padding: 0 10px !important;
+        margin-top: 20px !important;
+        max-height: none !important;
+        word-wrap: break-word;
     }
 
     .audio-btn {
-        font-size: 14px !important;
-        padding: 10px 20px !important;
-        margin-top: 25px !important;
+        font-size: 15px !important;
+        padding: 12px 24px !important;
+        margin-top: 30px !important;
         left: 0 !important;
+        position: relative !important;
     }
 
     .back-btn {
-        top: 10px !important;
-        left: 10px !important;
-        padding: 6px 12px !important;
+        top: 15px !important;
+        left: 15px !important;
+        padding: 8px 16px !important;
         font-size: 14px !important;
+        position: fixed !important;
+        z-index: 9999 !important;
     }
 
     /* Reduce chakra size on mobile */
     .chakra-layer {
-        width: 150vmin !important;
-        height: 150vmin !important;
+        width: 140vmin !important;
+        height: 140vmin !important;
     }
 
     /* Optimize particles for mobile */
     #dustCanvas {
-        opacity: 0.5;
+        opacity: 0.4;
     }
 }
 
 /* Small Mobile Devices */
 @media (max-width: 480px) {
+    body {
+        padding-top: 50px;
+    }
+
     .scroll-container {
-        width: 98vw !important;
-        padding: 30px 0 !important;
+        width: 95vw !important;
+        min-height: 88vh !important;
+        padding: 45px 0 45px 0 !important;
     }
 
     .scroll-content {
-        width: 90% !important;
-        top: 12% !important;
+        width: 82% !important;
+        top: 16% !important;
     }
 
     #outputText {
-        font-size: 0.9rem !important;
-        line-height: 1.6 !important;
-        padding: 0 10px !important;
+        font-size: 0.95rem !important;
+        line-height: 1.7 !important;
+        padding: 0 8px !important;
     }
 
     .form-card input,
     .form-card select {
         font-size: 15px !important;
-        padding: 10px 6px !important;
+        padding: 12px 8px !important;
     }
 
     button {
-        font-size: 13px !important;
-        padding: 10px 20px !important;
+        font-size: 14px !important;
+        padding: 12px 24px !important;
     }
 
     .audio-btn {
+        font-size: 14px !important;
+        padding: 10px 20px !important;
+    }
+
+    .back-btn {
+        top: 12px !important;
+        left: 12px !important;
+        padding: 6px 14px !important;
         font-size: 13px !important;
-        padding: 8px 16px !important;
     }
 }
 
 /* Landscape Mobile */
 @media (max-width: 768px) and (orientation: landscape) {
+    body {
+        padding-top: 20px;
+    }
+
     .scroll-container {
-        height: auto !important;
         min-height: 100vh !important;
-        padding: 20px 0 !important;
+        padding: 30px 0 !important;
     }
 
     .scroll-content {
-        top: 10% !important;
+        top: 12% !important;
+        padding-bottom: 40px;
     }
 
     #outputText {
-        max-height: 40vh;
+        max-height: 35vh;
         overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
     }
 }
 
