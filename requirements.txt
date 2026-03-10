@@ -16,7 +16,6 @@ mtranslate==1.8
 
 # HTTP & CORS
 python-multipart==0.0.12
-starlette==0.41.2
 
 # Optional: For better performance
 aiofiles==24.1.0
