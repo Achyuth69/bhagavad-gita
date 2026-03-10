@@ -1,0 +1,345 @@
+/* ================= MOBILE RESPONSIVE STYLES ================= */
+
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 1001;
+    transition: all 0.3s ease;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: white;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.navbar.scrolled .hamburger span {
+    background: #8B5E3C;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* Mobile Navigation */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+
+    .right-section {
+        position: fixed;
+        top: 70px;
+        right: -100%;
+        width: 280px;
+        height: calc(100vh - 70px);
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 30px 20px;
+        gap: 0;
+        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+    }
+
+    .right-section.active {
+        right: 0;
+    }
+
+    .navbar nav {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 0;
+    }
+
+    .navbar nav a {
+        color: #8B5E3C !important;
+        padding: 15px 20px;
+        width: 100%;
+        border-bottom: 1px solid rgba(139, 94, 60, 0.1);
+        margin: 0 !important;
+        font-size: 16px;
+        transition: all 0.3s ease;
+    }
+
+    .navbar nav a:hover {
+        background: rgba(212, 175, 55, 0.1);
+        padding-left: 30px;
+    }
+
+    .glow-btn {
+        margin-top: 20px;
+        width: calc(100% - 40px);
+        text-align: center;
+    }
+
+    /* Mobile Overlay */
+    .mobile-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 998;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .mobile-overlay.active {
+        display: block;
+        opacity: 1;
+    }
+}
+
+/* Tablet Responsive */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .container {
+        padding: 0 30px;
+    }
+
+    .navbar nav a {
+        margin-right: 10px;
+        font-size: 14px;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+}
+
+/* Mobile Hero Section */
+@media (max-width: 768px) {
+    .hero-overlay h1 {
+        font-size: 28px !important;
+        padding: 0 20px;
+    }
+
+    .hero-overlay p {
+        font-size: 14px !important;
+        padding: 0 20px;
+    }
+
+    .section {
+        padding: 60px 0 !important;
+    }
+
+    .section h2 {
+        font-size: 24px !important;
+    }
+
+    .features,
+    .team-grid {
+        gap: 20px !important;
+    }
+
+    .card,
+    .team-card {
+        width: 100% !important;
+        max-width: 350px;
+    }
+}
+
+/* Mobile Contact Form */
+@media (max-width: 768px) {
+    .contact-form {
+        width: 90%;
+        padding: 0 20px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+}
+
+/* Mobile Chapters Page */
+@media (max-width: 768px) {
+    .chapters-title {
+        font-size: 32px !important;
+        padding: 0 20px;
+    }
+
+    .chapters-subtitle {
+        font-size: 16px !important;
+        padding: 0 20px;
+    }
+
+    .chapters-container {
+        grid-template-columns: 1fr !important;
+        padding: 20px !important;
+        gap: 20px !important;
+    }
+
+    .chapter-card {
+        padding: 20px !important;
+    }
+
+    .chapter-number {
+        font-size: 3rem !important;
+        top: 10px !important;
+        right: 15px !important;
+    }
+
+    .chapter-name {
+        font-size: 1.2rem !important;
+        padding-right: 60px;
+    }
+
+    .chapter-description {
+        font-size: 0.9rem !important;
+        padding-right: 60px;
+    }
+
+    /* Disable custom cursor on mobile */
+    .divine-cursor {
+        display: none !important;
+    }
+}
+
+/* Mobile Translation Page */
+@media (max-width: 768px) {
+    .scroll-container {
+        width: 95vw !important;
+        height: 90vh !important;
+        background-size: 100% 100% !important;
+    }
+
+    .scroll-content {
+        width: 75% !important;
+        top: 25% !important;
+    }
+
+    .form-card input,
+    .form-card select {
+        width: 100% !important;
+        font-size: 14px !important;
+        padding: 10px !important;
+    }
+
+    .translate-btn {
+        font-size: 14px !important;
+        padding: 10px 20px !important;
+    }
+
+    #outputText {
+        font-size: 0.95rem !important;
+        line-height: 1.6 !important;
+        padding: 0 10px;
+    }
+
+    .audio-btn {
+        font-size: 14px !important;
+        padding: 8px 16px !important;
+        margin-top: 20px !important;
+    }
+
+    /* Reduce chakra size on mobile */
+    .chakra-layer {
+        width: 150vmin !important;
+        height: 150vmin !important;
+    }
+}
+
+/* Touch-friendly buttons */
+@media (hover: none) and (pointer: coarse) {
+    button,
+    .btn,
+    .glow-btn,
+    .audio-btn {
+        min-height: 44px; /* iOS recommended touch target */
+        min-width: 44px;
+    }
+
+    .navbar nav a {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+    }
+}
+
+/* Small Mobile Devices */
+@media (max-width: 480px) {
+    .hero-overlay h1 {
+        font-size: 24px !important;
+    }
+
+    .hero-overlay p {
+        font-size: 13px !important;
+    }
+
+    .btn {
+        padding: 10px 20px !important;
+        font-size: 14px !important;
+    }
+
+    .section h2 {
+        font-size: 22px !important;
+    }
+
+    .card,
+    .team-card {
+        padding: 20px !important;
+    }
+
+    .chapters-title {
+        font-size: 28px !important;
+    }
+
+    .chapter-number {
+        font-size: 2.5rem !important;
+    }
+}
+
+/* Landscape Mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    .hero {
+        height: auto !important;
+        min-height: 100vh;
+    }
+
+    .hero-overlay {
+        padding: 100px 20px 50px !important;
+    }
+
+    .scroll-container {
+        height: auto !important;
+        min-height: 100vh;
+        padding: 20px 0;
+    }
+}
+
+/* Prevent horizontal scroll */
+body {
+    overflow-x: hidden;
+    max-width: 100vw;
+}
+
+/* Improve touch scrolling */
+* {
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Fix iOS input zoom */
+@media (max-width: 768px) {
+    input,
+    select,
+    textarea {
+        font-size: 16px !important;
+    }
+}

@@ -1,0 +1,43 @@
+# ============================================
+# Bhagavad Gita Translation Dashboard
+# Python Dependencies
+# ============================================
+
+# Core Web Framework
+fastapi==0.109.0
+uvicorn[standard]==0.27.0
+pydantic==2.5.3
+
+# Text-to-Speech
+gTTS==2.5.0
+
+# Translation Service
+mtranslate==1.8
+
+# HTTP & CORS
+python-multipart==0.0.6
+starlette==0.35.1
+
+# Optional: For better performance
+aiofiles==23.2.1
+
+# ============================================
+# Installation Instructions:
+# ============================================
+# 
+# Option 1 (Recommended):
+#   Double-click: INSTALL_REQUIREMENTS.bat
+#
+# Option 2 (Manual):
+#   pip install -r requirements.txt
+#
+# Option 3 (With upgrade):
+#   pip install --upgrade -r requirements.txt
+#
+# ============================================
+# Verify Installation:
+# ============================================
+#
+# Run: python -c "import fastapi, gtts, mtranslate; print('All packages installed!')"
+#
+# ============================================

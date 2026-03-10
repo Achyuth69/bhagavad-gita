@@ -1,0 +1,152 @@
+/* ================= SMOOTH PAGE TRANSITIONS ================= */
+
+/* Page Loader Overlay */
+.page-loader {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, #050510 0%, #1a1a2e 50%, #050510 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+    pointer-events: none;
+}
+
+.page-loader.hidden {
+    opacity: 0;
+}
+
+/* Spinning Chakra Loader */
+.loader-chakra {
+    width: 80px;
+    height: 80px;
+    border: 4px solid rgba(212, 175, 55, 0.2);
+    border-top: 4px solid #d4af37;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Loading Text */
+.loader-text {
+    margin-top: 20px;
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    color: #d4af37;
+    letter-spacing: 3px;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
+
+/* Page Fade In Animation */
+body {
+    animation: pageIn 0.6s ease-out;
+}
+
+@keyframes pageIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Page Fade Out Animation */
+body.page-exit {
+    animation: pageOut 0.4s ease-in forwards;
+}
+
+@keyframes pageOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+/* Smooth Link Transitions */
+a {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Button Click Effect */
+button, .btn, .glow-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+button::before, .btn::before, .glow-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+button:active::before, .btn:active::before, .glow-btn:active::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Smooth Scroll Behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Content Fade In on Scroll */
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Loading Bar */
+.loading-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #d4af37, #f4d03f);
+    z-index: 10000;
+    transition: width 0.3s ease;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+}
+
+.loading-bar.active {
+    animation: loadingProgress 2s ease-in-out;
+}
+
+@keyframes loadingProgress {
+    0% { width: 0%; }
+    50% { width: 70%; }
+    100% { width: 100%; }
+}

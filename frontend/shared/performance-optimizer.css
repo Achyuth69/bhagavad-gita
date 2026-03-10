@@ -1,0 +1,336 @@
+/* ================= PERFORMANCE OPTIMIZATION FOR MOBILE ================= */
+
+/* Hardware Acceleration for Smooth Animations */
+.navbar,
+.hamburger,
+.right-section,
+.mobile-overlay,
+.page-loader,
+.loader-chakra,
+.chakra-layer,
+.scroll-container,
+.chapter-card,
+.card,
+.team-card,
+.btn,
+.glow-btn {
+    will-change: auto;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    perspective: 1000px;
+    -webkit-perspective: 1000px;
+}
+
+/* Optimize Animations for 60fps */
+@media (prefers-reduced-motion: no-preference) {
+    * {
+        animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+}
+
+/* Reduce Motion for Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* GPU Accelerated Transforms */
+.navbar {
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+}
+
+.right-section {
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+}
+
+/* Optimize Images for Performance */
+img {
+    content-visibility: auto;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+/* Lazy Load Images */
+img[loading="lazy"] {
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+img[loading="lazy"].loaded {
+    opacity: 1;
+}
+
+/* Optimize Video Performance */
+video {
+    content-visibility: auto;
+    contain: layout style paint;
+}
+
+/* Contain Layout Shifts */
+.hero,
+.section,
+.chapters-container,
+.scroll-container {
+    contain: layout style paint;
+}
+
+/* Optimize Scroll Performance */
+.hero,
+.section,
+.chapters-main {
+    contain: layout;
+    content-visibility: auto;
+}
+
+/* Reduce Paint Areas */
+.navbar,
+.card,
+.chapter-card,
+.team-card {
+    contain: layout style paint;
+}
+
+/* Optimize Canvas Performance */
+#dustCanvas,
+#warpCanvas {
+    will-change: auto;
+    pointer-events: none;
+    contain: strict;
+}
+
+/* Optimize Backdrop Filters (Heavy on Mobile) */
+@media (max-width: 768px) {
+    .right-section {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background: rgba(255, 255, 255, 0.98) !important;
+    }
+
+    .chapter-card {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background: rgba(44, 27, 24, 0.08) !important;
+    }
+}
+
+/* Optimize Shadows for Mobile */
+@media (max-width: 768px) {
+    .card,
+    .team-card,
+    .chapter-card {
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .navbar.scrolled {
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08) !important;
+    }
+}
+
+/* Optimize Blur Effects */
+@media (max-width: 768px) {
+    .hero-overlay {
+        backdrop-filter: none !important;
+    }
+
+    *[style*="blur"] {
+        filter: none !important;
+    }
+}
+
+/* Passive Event Listeners (Handled in JS) */
+* {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Optimize Font Rendering */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeSpeed;
+}
+
+/* Optimize Text Selection */
+::selection {
+    background: rgba(212, 175, 55, 0.3);
+    color: inherit;
+}
+
+/* Reduce Repaints on Scroll */
+.navbar {
+    contain: layout style;
+}
+
+/* Optimize Transitions */
+a,
+button,
+.btn,
+.glow-btn {
+    transition-property: transform, opacity, background-color, color;
+    transition-duration: 0.3s;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Optimize Hover States for Touch Devices */
+@media (hover: none) {
+    .card:hover,
+    .team-card:hover,
+    .chapter-card:hover {
+        transform: none !important;
+    }
+
+    a:hover,
+    button:hover,
+    .btn:hover {
+        transform: none !important;
+    }
+}
+
+/* Optimize Animations for Low-End Devices */
+@media (max-width: 768px) {
+    .chakra-layer {
+        animation-duration: 240s !important;
+    }
+
+    @keyframes rotateChakra {
+        from { transform: translate(-50%, -50%) rotate(0deg); }
+        to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+}
+
+/* Optimize Particle Canvas for Mobile */
+@media (max-width: 768px) {
+    #dustCanvas {
+        display: none !important;
+    }
+
+    .dimension-rift {
+        display: none !important;
+    }
+}
+
+/* Optimize Form Inputs */
+input,
+select,
+textarea {
+    -webkit-appearance: none;
+    appearance: none;
+    will-change: auto;
+}
+
+/* Prevent Layout Shift */
+.hero-video {
+    content-visibility: auto;
+    contain-intrinsic-size: 100vw 100vh;
+}
+
+/* Optimize Button Ripple Effect */
+button::before,
+.btn::before,
+.glow-btn::before {
+    will-change: width, height;
+    contain: layout style paint;
+}
+
+/* Optimize Scroll Container */
+.scroll-container {
+    will-change: auto;
+    transform: translate3d(0, 0, 0);
+}
+
+/* Reduce Complexity on Mobile */
+@media (max-width: 768px) {
+    /* Simplify gradients */
+    .hero-overlay {
+        background: rgba(0, 0, 0, 0.6) !important;
+    }
+
+    /* Reduce glow effects */
+    .glow-btn {
+        box-shadow: none !important;
+    }
+
+    .glow-btn:hover {
+        box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3) !important;
+    }
+
+    /* Simplify borders */
+    .chapter-card {
+        border: 1px solid rgba(212, 175, 55, 0.3) !important;
+    }
+}
+
+/* Optimize Critical Rendering Path */
+.navbar,
+.hero {
+    contain: layout style;
+}
+
+/* Prevent Unnecessary Reflows */
+* {
+    box-sizing: border-box;
+}
+
+/* Optimize Flexbox Performance */
+.nav-content,
+.right-section,
+.features,
+.team-grid,
+.chapters-container {
+    contain: layout;
+}
+
+/* Optimize Grid Performance */
+.chapters-container {
+    contain: layout style;
+}
+
+/* Fast Click for Mobile */
+a,
+button,
+.btn,
+.glow-btn {
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* Optimize Video Loading */
+.hero-video {
+    loading: lazy;
+}
+
+/* Reduce Memory Usage */
+@media (max-width: 768px) {
+    .hero-video {
+        max-width: 100vw;
+        max-height: 100vh;
+    }
+}
+
+/* Optimize Intersection Observer Elements */
+.fade-in-section {
+    content-visibility: auto;
+}
+
+/* Prevent Jank on Scroll */
+body {
+    overflow-anchor: auto;
+}
+
+/* Optimize for 120Hz Displays */
+@media (min-resolution: 120dpi) {
+    * {
+        animation-timing-function: linear;
+    }
+}
