@@ -6,7 +6,7 @@
 # Core Web Framework
 fastapi==0.115.0
 uvicorn[standard]==0.32.0
-pydantic==2.9.2
+pydantic==2.10.5
 
 # Text-to-Speech
 gTTS==2.5.3
