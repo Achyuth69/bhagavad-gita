@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let data = null;
 
         try {
-            const response = await fetch("http://127.0.0.1:8000/get-meaning", {
+            const response = await fetch(`${API_BASE_URL}/get-meaning`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // meaning audio from backend
-            audioMeaning.src = "http://127.0.0.1:8000" + data.audio_url;
+            audioMeaning.src = API_BASE_URL + data.audio_url;
 
             // shloka audio using browser speech
             const cleanShloka = lastShloka

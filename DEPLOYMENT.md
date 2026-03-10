@@ -18,12 +18,11 @@
 2. Connect your GitHub repository: `Achyuth69/bhagavad-gita`
 3. Configure:
    - **Name**: `bhagavad-gita-backend`
-   - **Region**: Oregon (or closest to you)
+   - **Region**: Singapore (closest to India)
    - **Branch**: `main`
    - **Root Directory**: Leave empty
-   - **Environment**: `Python 3`
-   - **Build Command**: `pip install -r requirements.txt`
-   - **Start Command**: `cd backend && uvicorn backend:app --host 0.0.0.0 --port $PORT`
+   - **Environment**: `Docker` (IMPORTANT: Select Docker, not Python!)
+   - **Dockerfile Path**: `./Dockerfile`
    - **Plan**: Free
 4. Click "Create Web Service"
 5. Wait 5-10 minutes for deployment
@@ -42,11 +41,20 @@
 5. Your frontend URL: `https://bhagavad-gita-frontend.onrender.com`
 
 #### 4. Update Frontend API URL
-After backend is deployed, update your frontend JavaScript files to use the production backend URL instead of `http://localhost:8000`
+After backend is deployed:
 
-**Files to update:**
-- `frontend/BV/script.js` - Change API endpoint to your Render backend URL
-- Any other files making API calls
+1. Copy your backend URL from Render (e.g., `https://bhagavad-gita-backend.onrender.com`)
+2. Open `frontend/config.js`
+3. Update the `API_BASE_URL` with your backend URL:
+   ```javascript
+   const API_BASE_URL = "https://your-backend-url.onrender.com";
+   ```
+4. Commit and push:
+   ```bash
+   git add frontend/config.js
+   git commit -m "Update API URL to production backend"
+   git push origin main
+   ```
 
 #### 5. Test Your Deployment
 - Visit your frontend URL
