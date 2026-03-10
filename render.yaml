@@ -3,7 +3,7 @@ services:
   - type: web
     name: bhagavad-gita-backend
     env: python
-    region: oregon
+    region: singapore
     plan: free
     pythonVersion: 3.11.9
     buildCommand: pip install -r requirements.txt
