@@ -15,12 +15,24 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        const name = document.getElementById('userName').value;
+        const name = document.getElementById('userName').value.trim();
         const lang = document.getElementById('userLanguage').value || 'english';
+
+        if (!name) {
+            alert('Please enter a Sanskrit shloka');
+            return;
+        }
 
         let data = null;
 
+        // Show loading state
+        outputSection.style.visibility = 'visible';
+        outputText.textContent = 'Translating...';
+
         try {
+            console.log('Sending request to:', `${API_BASE_URL}/get-meaning`);
+            console.log('Payload:', { shloka: name, language: lang });
+
             const response = await fetch(`${API_BASE_URL}/get-meaning`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -30,15 +42,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 })
             });
 
-            data = await response.json();
+            console.log('Response status:', response.status);
 
-            if (data.text) {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            data = await response.json();
+            console.log('Response data:', data);
+
+            if (data && data.text) {
                 currentMessage = data.text;
+            } else if (data && data.error) {
+                currentMessage = `Error: ${data.error}`;
+            } else {
+                currentMessage = "Translation not found. Please check the shloka text.";
             }
 
         } catch (err) {
             console.error("API error:", err);
-            currentMessage = "Unable to fetch translation. Please check your connection.";
+            currentMessage = `Unable to fetch translation: ${err.message}. Please check your connection and try again.`;
         }
 
         outputSection.style.visibility = 'visible';
@@ -202,5 +225,15 @@ document.addEventListener('DOMContentLoaded', () => {
         resizeCanvas();
         animateParticles();
     }
+
+    // Navbar scroll effect for translation page
+    window.addEventListener("scroll", function() {
+        const nav = document.querySelector(".navbar");
+        if (window.scrollY > 50) {
+            nav.classList.add("scrolled");
+        } else {
+            nav.classList.remove("scrolled");
+        }
+    });
 
 });

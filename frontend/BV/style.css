@@ -44,8 +44,21 @@ body.translation-page .navbar {
     left: 0 !important;
     right: 0 !important;
     z-index: 1000 !important;
-    background: rgba(0, 0, 0, 0.5) !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+}
+
+body.translation-page .navbar.scrolled {
+    background: rgba(0, 0, 0, 0.3) !important;
     backdrop-filter: blur(10px) !important;
+}
+
+body.translation-page .navbar nav a {
+    color: white !important;
+}
+
+body.translation-page .navbar .logo {
+    color: #D4AF37 !important;
 }
 
 /* 1. Galaxy Background & Layout */
