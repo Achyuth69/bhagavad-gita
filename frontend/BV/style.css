@@ -16,23 +16,58 @@
     padding: 0;
 }
 
+/* Translation Page Specific Body Override */
+body.translation-page {
+    width: 100vw !important;
+    min-height: 100vh !important;
+    height: 100vh !important;
+    overflow: hidden !important;
+    background-color: #050510 !important;
+    background-image: url('galaxy.jpg') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    font-family: var(--font-title) !important;
+    color: var(--parchment-ink) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Navbar on translation page */
+body.translation-page .navbar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 1000 !important;
+    background: rgba(0, 0, 0, 0.5) !important;
+    backdrop-filter: blur(10px) !important;
+}
+
 /* 1. Galaxy Background & Layout */
 body {
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    background-color: #050510;
-    background-image: url('galaxy.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: var(--font-title);
-    color: var(--parchment-ink);
+    width: 100vw !important;
+    min-height: 100vh !important;
+    height: 100vh !important;
+    overflow: hidden !important;
+    background-color: #050510 !important;
+    background-image: url('galaxy.jpg') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    font-family: var(--font-title) !important;
+    color: var(--parchment-ink) !important;
     will-change: auto;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 /* 2. Rotating Sudarshana Chakra (Background Layer) */
@@ -207,32 +242,32 @@ body {
 
 /* 3. Scroll Image (Foreground Layer) */
 .scroll-container {
-    position: relative;
-    z-index: 10; /* Above Chakra and Dust */
-    width: min(900px, 100vw);
-    height: min(1200px, 115vh);
+    position: relative !important;
+    z-index: 10 !important; /* Above Chakra and Dust */
+    width: min(900px, 100vw) !important;
+    height: min(1200px, 115vh) !important;
      
-    background-image: url('scroll.png'); /* Ensure this image exists */
-    background-size: 100% 100%; /* Stretch to fit container */
-    background-position: center;
-    background-repeat: no-repeat;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background-image: url('scroll.png') !important; /* Ensure this image exists */
+    background-size: 100% 100% !important; /* Stretch to fit container */
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
 
-    filter: drop-shadow(0 50px 100px rgba(0,0,0,0.95));
+    filter: drop-shadow(0 50px 100px rgba(0,0,0,0.95)) !important;
 }
 
 .scroll-content {
-    position: absolute;
-    top: 30%;              /* 👈 THIS controls vertical position */
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
+    position: absolute !important;
+    top: 30% !important;              /* 👈 THIS controls vertical position */
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 60% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 1rem !important;
 }
 
 /* 4. Transparent Form */
