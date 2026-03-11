@@ -358,6 +358,7 @@ button:disabled {
 }
 
 #outputText {
+    width:85%;
     margin-top: 20px;
     margin-bottom: 10px;
     font-family: var(--font-body);
