@@ -37,13 +37,6 @@ body.translation-page {
     padding: 0 !important;
 }
 
-/* Force remove any container padding/margin on translation page */
-body.translation-page .container {
-    padding: 0 !important;
-    margin: 0 !important;
-    max-width: none !important;
-}
-
 /* Navbar on translation page */
 body.translation-page .navbar {
     position: fixed !important;
@@ -53,7 +46,6 @@ body.translation-page .navbar {
     z-index: 1000 !important;
     background: transparent !important;
     backdrop-filter: none !important;
-    padding: 1rem 2rem !important;
 }
 
 body.translation-page .navbar.scrolled {
@@ -67,11 +59,6 @@ body.translation-page .navbar nav a {
 
 body.translation-page .navbar .logo {
     color: #D4AF37 !important;
-}
-
-body.translation-page .navbar .glow-btn {
-    background: linear-gradient(45deg, #dcb228, #D4AF37) !important;
-    color: white !important;
 }
 
 /* 1. Galaxy Background & Layout */
@@ -94,13 +81,6 @@ body {
     will-change: auto;
     margin: 0 !important;
     padding: 0 !important;
-    position: relative !important;
-}
-
-/* Override any section/container styles */
-body > section,
-body > div:not(.chakra-layer):not(.dimension-rift):not(.scroll-container):not(.multiverse-flash):not(.page-loader):not(#dustCanvas) {
-    display: none !important;
 }
 
 /* 2. Rotating Sudarshana Chakra (Background Layer) */
@@ -141,19 +121,19 @@ body > div:not(.chakra-layer):not(.dimension-rift):not(.scroll-container):not(.m
 } */
 
 .chakra-layer {
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    width: 120vmin !important;
-    height: 120vmin !important;
-    transform: translate(-50%, -50%) !important;
-    pointer-events: none !important;
-    z-index: 1 !important;
-    opacity: 0.85 !important;
-    animation: rotateChakra 180s linear infinite !important;
-    will-change: transform !important;
-    backface-visibility: hidden !important;
-    contain: layout style paint !important;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120vmin;
+    height: 120vmin;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.85;
+    animation: rotateChakra 180s linear infinite;
+    will-change: transform;
+    backface-visibility: hidden;
+    contain: layout style paint;
 }
 
 /* @keyframes chakraBreath {
@@ -277,8 +257,8 @@ body > div:not(.chakra-layer):not(.dimension-rift):not(.scroll-container):not(.m
 .scroll-container {
     position: relative !important;
     z-index: 10 !important; /* Above Chakra and Dust */
-    width: min(900px, 90vw) !important;
-    height: min(1200px, 90vh) !important;
+    width: min(900px, 100vw) !important;
+    height: min(1200px, 115vh) !important;
      
     background-image: url('scroll.png') !important; /* Ensure this image exists */
     background-size: 100% 100% !important; /* Stretch to fit container */
@@ -289,7 +269,6 @@ body > div:not(.chakra-layer):not(.dimension-rift):not(.scroll-container):not(.m
     align-items: center !important;
 
     filter: drop-shadow(0 50px 100px rgba(0,0,0,0.95)) !important;
-    margin: 0 auto !important;
 }
 
 .scroll-content {
