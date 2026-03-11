@@ -215,14 +215,36 @@ body.translation-page .scroll-content {
     top: 22% !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
-    width: 75% !important;
-    max-width: 650px !important;
+    width: 65% !important;
+    max-width: 550px !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     gap: 1rem !important;
-    padding: 0 25px !important;
+    padding: 0 30px !important;
     z-index: 50 !important;
+    max-height: 65% !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+}
+
+/* Custom scrollbar for scroll content */
+body.translation-page .scroll-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+body.translation-page .scroll-content::-webkit-scrollbar-track {
+    background: rgba(44, 27, 24, 0.1);
+    border-radius: 3px;
+}
+
+body.translation-page .scroll-content::-webkit-scrollbar-thumb {
+    background: #d4af37;
+    border-radius: 3px;
+}
+
+body.translation-page .scroll-content::-webkit-scrollbar-thumb:hover {
+    background: #b8941f;
 }
 
 /* Force output section visibility */
@@ -233,16 +255,15 @@ body.translation-page .output-section {
     align-items: center !important;
     width: 100% !important;
     margin-top: 20px !important;
-    max-height: 350px !important;
-    overflow-y: auto !important;
-    -webkit-overflow-scrolling: touch !important;
+    max-height: none !important;
+    overflow: visible !important;
 }
 
 body.translation-page #outputText {
     margin-top: 15px !important;
     font-family: 'MedievalSharp', cursive !important;
-    font-size: 1rem !important;
-    line-height: 1.7 !important;
+    font-size: 0.95rem !important;
+    line-height: 1.6 !important;
     font-weight: 600 !important;
     color: #2c1b18 !important;
     text-align: center !important;
@@ -250,15 +271,19 @@ body.translation-page #outputText {
     word-break: break-word !important;
     word-wrap: break-word !important;
     max-width: 100% !important;
-    padding: 0 15px !important;
+    padding: 0 10px !important;
+    overflow-wrap: break-word !important;
+    hyphens: auto !important;
 }
 
 /* Mobile responsive */
 @media (max-width: 768px) {
     body.translation-page .scroll-content {
         top: 15% !important;
-        width: 85% !important;
-        padding: 0 15px !important;
+        width: 80% !important;
+        max-width: 90% !important;
+        padding: 0 20px !important;
+        max-height: 70% !important;
     }
 
     body.translation-page input[type="text"],
@@ -277,15 +302,17 @@ body.translation-page #outputText {
     }
 
     body.translation-page #outputText {
-        font-size: 0.9rem !important;
-        padding: 0 10px !important;
+        font-size: 0.85rem !important;
+        padding: 0 8px !important;
+        line-height: 1.5 !important;
     }
 }
 
 @media (max-width: 480px) {
     body.translation-page .scroll-content {
-        width: 90% !important;
-        padding: 0 10px !important;
+        width: 85% !important;
+        padding: 0 15px !important;
+        max-height: 75% !important;
     }
 
     body.translation-page input[type="text"],
@@ -297,6 +324,7 @@ body.translation-page #outputText {
     }
 
     body.translation-page #outputText {
-        font-size: 0.85rem !important;
+        font-size: 0.8rem !important;
+        padding: 0 5px !important;
     }
 }
