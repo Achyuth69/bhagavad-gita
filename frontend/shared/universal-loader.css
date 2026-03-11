@@ -1,0 +1,321 @@
+/* ===== UNIVERSAL PAGE LOADER - RESPONSIVE ===== */
+
+.page-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #0a0e27 0%, #1a1a3e 50%, #2d1b69 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.page-loader.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* Rotating Chakra Loader */
+.loader-chakra {
+    width: 80px;
+    height: 80px;
+    border: 4px solid transparent;
+    border-top-color: #d4af37;
+    border-right-color: #d4af37;
+    border-radius: 50%;
+    animation: chakraSpin 1.2s linear infinite;
+    position: relative;
+    box-shadow: 
+        0 0 30px rgba(212, 175, 55, 0.5),
+        inset 0 0 20px rgba(212, 175, 55, 0.3);
+}
+
+.loader-chakra::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    border: 3px solid transparent;
+    border-bottom-color: #ffd700;
+    border-left-color: #ffd700;
+    border-radius: 50%;
+    animation: chakraSpin 0.8s linear infinite reverse;
+}
+
+.loader-chakra::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border: 2px solid transparent;
+    border-top-color: #b8941f;
+    border-right-color: #b8941f;
+    border-radius: 50%;
+    animation: chakraSpin 0.6s linear infinite;
+}
+
+@keyframes chakraSpin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Loading Text */
+.loader-text {
+    margin-top: 30px;
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    color: #d4af37;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    animation: loaderPulse 1.5s ease-in-out infinite;
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+}
+
+@keyframes loaderPulse {
+    0%, 100% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Loading Progress Bar (Optional) */
+.loader-progress {
+    width: 200px;
+    height: 3px;
+    background: rgba(212, 175, 55, 0.2);
+    border-radius: 10px;
+    margin-top: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+.loader-progress::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, #d4af37, transparent);
+    animation: loaderProgress 1.5s ease-in-out infinite;
+}
+
+@keyframes loaderProgress {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+
+/* Mobile Devices (Portrait) */
+@media (max-width: 480px) {
+    .loader-chakra {
+        width: 60px;
+        height: 60px;
+        border-width: 3px;
+    }
+    
+    .loader-chakra::before {
+        width: 45px;
+        height: 45px;
+        border-width: 2px;
+    }
+    
+    .loader-chakra::after {
+        width: 30px;
+        height: 30px;
+        border-width: 2px;
+    }
+    
+    .loader-text {
+        font-size: 0.9rem;
+        letter-spacing: 2px;
+        margin-top: 20px;
+    }
+    
+    .loader-progress {
+        width: 150px;
+        height: 2px;
+    }
+}
+
+/* Tablets (Portrait) */
+@media (min-width: 481px) and (max-width: 768px) {
+    .loader-chakra {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .loader-chakra::before {
+        width: 52px;
+        height: 52px;
+    }
+    
+    .loader-chakra::after {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .loader-text {
+        font-size: 1rem;
+        letter-spacing: 2.5px;
+    }
+    
+    .loader-progress {
+        width: 180px;
+    }
+}
+
+/* Tablets (Landscape) and Small Desktops */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .loader-chakra {
+        width: 75px;
+        height: 75px;
+    }
+    
+    .loader-chakra::before {
+        width: 56px;
+        height: 56px;
+    }
+    
+    .loader-chakra::after {
+        width: 38px;
+        height: 38px;
+    }
+    
+    .loader-text {
+        font-size: 1.1rem;
+    }
+}
+
+/* Large Screens */
+@media (min-width: 1441px) {
+    .loader-chakra {
+        width: 100px;
+        height: 100px;
+        border-width: 5px;
+    }
+    
+    .loader-chakra::before {
+        width: 75px;
+        height: 75px;
+        border-width: 4px;
+    }
+    
+    .loader-chakra::after {
+        width: 50px;
+        height: 50px;
+        border-width: 3px;
+    }
+    
+    .loader-text {
+        font-size: 1.4rem;
+        letter-spacing: 4px;
+        margin-top: 40px;
+    }
+    
+    .loader-progress {
+        width: 250px;
+        height: 4px;
+    }
+}
+
+/* Landscape Orientation Adjustments */
+@media (max-height: 500px) and (orientation: landscape) {
+    .loader-chakra {
+        width: 50px;
+        height: 50px;
+        border-width: 2px;
+    }
+    
+    .loader-chakra::before {
+        width: 38px;
+        height: 38px;
+        border-width: 2px;
+    }
+    
+    .loader-chakra::after {
+        width: 25px;
+        height: 25px;
+        border-width: 1px;
+    }
+    
+    .loader-text {
+        font-size: 0.8rem;
+        margin-top: 15px;
+        letter-spacing: 1.5px;
+    }
+    
+    .loader-progress {
+        width: 120px;
+        height: 2px;
+        margin-top: 10px;
+    }
+}
+
+/* High DPI Displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .loader-chakra {
+        box-shadow: 
+            0 0 40px rgba(212, 175, 55, 0.6),
+            inset 0 0 25px rgba(212, 175, 55, 0.4);
+    }
+    
+    .loader-text {
+        text-shadow: 0 0 25px rgba(212, 175, 55, 0.7);
+    }
+}
+
+/* Reduced Motion Preference */
+@media (prefers-reduced-motion: reduce) {
+    .loader-chakra,
+    .loader-chakra::before,
+    .loader-chakra::after {
+        animation-duration: 3s;
+    }
+    
+    .loader-text {
+        animation: none;
+        opacity: 1;
+    }
+    
+    .loader-progress::before {
+        animation-duration: 3s;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    .page-loader {
+        background: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #1a1a1a 100%);
+    }
+}
+
+/* Print - Hide Loader */
+@media print {
+    .page-loader {
+        display: none !important;
+    }
+}
