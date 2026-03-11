@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bhagavad Gita - Translation</title>
 
-    <!-- Preload critical resources -->
     <link rel="preload" href="galaxy.jpg" as="image" />
     <link rel="preload" href="scroll.png" as="image" />
     <link rel="preload" href="chakra.png" as="image" />
@@ -49,7 +48,6 @@
     <div class="dimension-rift"></div>
     <div class="scroll-container">
         <div class="scroll-content">
-           
 
             <!-- Translation Form -->
             <form class="form-card" id="divineForm">
@@ -64,7 +62,6 @@
 
                 <!-- Language Selection -->
                 <select id="userLanguage">
-
                     <option value="english">English</option>
                     <option value="hindi">Hindi</option>
                     <option value="telugu">Telugu</option>
@@ -75,7 +72,6 @@
                     <option value="bengali">Bengali</option>
                     <option value="gujarati">Gujarati</option>
                     <option value="urdu">Urdu</option>
-
                     <option value="afrikaans">Afrikaans</option>
                     <option value="albanian">Albanian</option>
                     <option value="amharic">Amharic</option>
@@ -163,8 +159,8 @@
                     <option value="yiddish">Yiddish</option>
                     <option value="yoruba">Yoruba</option>
                     <option value="zulu">Zulu</option>
-
                 </select>
+
                 <!-- Translate Button -->
                 <button type="submit" class="translate-btn">
                     ✨ Translate
@@ -175,10 +171,6 @@
             <!-- Output Section -->
             <div id="outputSection" class="output-section" style="visibility: hidden;">
                 <p id="outputText"></p>
-
-                <button id="playAudioBtn" class="audio-btn glow-btn" style="display:none;">
-                    🔊 Listen
-                </button>
             </div>
 
         </div>
@@ -187,7 +179,7 @@
     <canvas id="dustCanvas"></canvas>
 
     <script src="../config.js"></script>
-    <script src="script.js" defer></script>
+    <script src="script.js"></script>
     <script src="../shared/transitions.js"></script>
     <script src="../shared/mobile-menu.js"></script>
     <script>

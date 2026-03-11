@@ -387,6 +387,118 @@ button:disabled {
     will-change: auto;
     contain: strict;
 }
+
+/* ===== MOBILE RESPONSIVE ===== */
+@media (max-width: 768px) {
+    body {
+        background-attachment: scroll;
+        overflow-y: auto;
+        min-height: 100vh;
+    }
+
+    .chakra-layer {
+        width: 100vmin;
+        height: 100vmin;
+        opacity: 0.6;
+        animation-duration: 240s;
+    }
+
+    .chakra-layer::after {
+        display: none;
+    }
+
+    .scroll-container {
+        width: 95vw;
+        min-height: auto;
+        height: auto;
+        padding: 40px 20px;
+        margin: 20px auto;
+        filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5));
+    }
+
+    .scroll-content {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        width: 90%;
+        padding: 20px 10px;
+        margin-top: 40px;
+    }
+
+    input, select {
+        width: 100%;
+        font-size: 16px;
+        padding: 12px 8px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 12px 24px;
+        min-height: 44px;
+    }
+
+    #outputText {
+        font-size: 0.95rem;
+        line-height: 1.7;
+        padding: 0 10px;
+        margin-top: 15px;
+    }
+
+    #dustCanvas {
+        opacity: 0.3;
+    }
+
+    .back-btn {
+        top: 10px;
+        left: 10px;
+        padding: 6px 12px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .scroll-container {
+        width: 98vw;
+        padding: 30px 15px;
+    }
+
+    .scroll-content {
+        width: 95%;
+        padding: 15px 5px;
+    }
+
+    #outputText {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+
+    input, select {
+        font-size: 15px;
+        padding: 10px 6px;
+    }
+
+    button {
+        font-size: 13px;
+        padding: 10px 20px;
+    }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+    .scroll-container {
+        min-height: auto;
+        padding: 20px 15px;
+    }
+
+    .scroll-content {
+        margin-top: 20px;
+    }
+
+    #outputText {
+        max-height: 40vh;
+        overflow-y: auto;
+    }
+}
 .back-btn {
   position: fixed;
   top: 20px;

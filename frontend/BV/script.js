@@ -3,13 +3,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('divineForm');
     const outputSection = document.getElementById('outputSection');
     const outputText = document.getElementById('outputText');
-    const audioBtn = document.getElementById('playAudioBtn');
 
     let currentMessage = "";
-    let lastShloka = "";
     let portalMode = false;
 
-    // ===== MULTIVERSE FLASH LAYER =====
+    // Multiverse flash layer
     const flash = document.createElement("div");
     flash.className = "multiverse-flash";
     document.body.appendChild(flash);
@@ -18,8 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
 
         const name = document.getElementById('userName').value;
-        lastShloka = name;
-
         const lang = document.getElementById('userLanguage').value || 'english';
 
         let data = null;
@@ -41,12 +37,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
         } catch (err) {
-            console.error("FastAPI error:", err);
+            console.error("API error:", err);
+            currentMessage = "Unable to fetch translation. Please check your connection.";
         }
 
         outputSection.style.visibility = 'visible';
 
-        // ===== MULTIVERSE ACTIVATION =====
+        // Multiverse activation
         const chakra = document.querySelector(".chakra-layer");
         const scroll = document.querySelector(".scroll-container");
 
@@ -71,113 +68,19 @@ document.addEventListener('DOMContentLoaded', () => {
         outputText.classList.add("reveal");
 
         assembleText(currentMessage, outputText);
+    });
 
-        // ===== AUDIO FROM FASTAPI =====
-        let newAudioBtn = null;
-
-        if (audioBtn) {
-
-            newAudioBtn = audioBtn.cloneNode(true);
-
-            if (audioBtn.parentNode) {
-                audioBtn.parentNode.replaceChild(newAudioBtn, audioBtn);
-            }
-
-            newAudioBtn.style.display = "flex";
-        }
-
-        if (data && data.audio_url && newAudioBtn) {
-
-            let audioMeaning = document.getElementById("gitaMeaningAudio");
-            let audioShloka = document.getElementById("gitaShlokaAudio");
-
-            if (!audioMeaning) {
-                audioMeaning = document.createElement("audio");
-                audioMeaning.id = "gitaMeaningAudio";
-                document.body.appendChild(audioMeaning);
-            }
-
-            if (!audioShloka) {
-                audioShloka = document.createElement("audio");
-                audioShloka.id = "gitaShlokaAudio";
-                document.body.appendChild(audioShloka);
-            }
-
-            // meaning audio from backend
-            audioMeaning.src = API_BASE_URL + data.audio_url;
-
-            // shloka audio using browser speech
-            const cleanShloka = lastShloka
-                .replace(/[0-9]/g, "")       // remove digits
-                .replace(/[॥।]/g, "")       // remove Sanskrit punctuation
-                .replace(/\./g, "")         // remove dots
-                .trim();
-
-            const shlokaSpeech = new SpeechSynthesisUtterance(cleanShloka);
-            shlokaSpeech.lang = "hi-IN";
-            shlokaSpeech.rate = 0.9;
-
-            newAudioBtn.style.display = "flex";
-
-            newAudioBtn.addEventListener("click", () => {
-
-                // 🔴 Stop any previous speech
-                speechSynthesis.cancel();
-
-                // 🔴 Stop meaning audio if playing
-                if (!audioMeaning.paused) {
-                    audioMeaning.pause();
-                    audioMeaning.currentTime = 0;
-                }
-
-                // Clean shloka
-                const cleanShloka = lastShloka
-                    .replace(/[0-9]/g, "")
-                    .replace(/[॥।]/g, "")
-                    .replace(/\./g, "")
-                    .trim();
-
-                const shlokaSpeech = new SpeechSynthesisUtterance(cleanShloka);
-                shlokaSpeech.lang = "hi-IN";
-                shlokaSpeech.rate = 0.9;
-
-                // Speak shloka
-                speechSynthesis.speak(shlokaSpeech);
-
-                // After shloka finished
-                shlokaSpeech.onend = () => {
-
-                    setTimeout(() => {
-
-                        audioMeaning.currentTime = 0;
-                        audioMeaning.play().catch(err => console.error(err));
-
-                    }, 2000);
-
-                };
-
-            });
-
-        }
-
-    });  // ✅ THIS WAS MISSING
-    
-    // ===== COSMIC TEXT ASSEMBLY =====
+    // Cosmic text assembly
     function assembleText(text, element) {
-
         element.innerHTML = "";
 
         const fragment = document.createDocumentFragment();
-
         const words = text.split(" ");
         const maxWords = 100;
 
         words.slice(0, maxWords).forEach((word, index) => {
-
             const span = document.createElement("span");
-
             span.textContent = word + " ";
-
             span.style.cssText = `
                 opacity:0;
                 transform:translateY(20px);
@@ -191,52 +94,39 @@ document.addEventListener('DOMContentLoaded', () => {
                 span.style.opacity = 1;
                 span.style.transform = "translateY(0)";
             }, index * 40);
-
         });
 
         element.appendChild(fragment);
-
     }
 
-    // ===== PARTICLES =====
+    // Particles
     const canvas = document.getElementById('dustCanvas');
     const ctx = canvas.getContext('2d');
 
     let particles = [];
 
     function resizeCanvas() {
-
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-
         initParticles();
-
     }
 
     class Particle {
-
         constructor() {
             this.reset();
         }
 
         reset() {
-
             this.x = Math.random() * canvas.width;
             this.y = Math.random() * canvas.height;
-
             this.size = Math.random() * 2 + 0.5;
-
             this.speedX = (Math.random() - 0.5) * 0.4;
             this.speedY = (Math.random() - 0.5) * 0.4;
-
             this.opacity = Math.random() * 0.7 + 0.3;
-
         }
 
         update() {
-
             if (portalMode) {
-
                 const centerX = canvas.width / 2;
                 const centerY = canvas.height / 2;
 
@@ -255,9 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (distance < 5) {
                     this.reset();
                 }
-
             } else {
-
                 this.x += this.speedX;
                 this.y += this.speedY;
 
@@ -266,37 +154,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (this.y < 0) this.y = canvas.height;
                 if (this.y > canvas.height) this.y = 0;
-
             }
-
         }
 
         draw() {
-
             ctx.fillStyle = `rgba(212,175,55,${this.opacity})`;
-
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
             ctx.fill();
-
         }
-
     }
 
     function initParticles() {
-
         particles = [];
-
         const count = window.innerWidth < 768 ? 40 : 80;
 
         for (let i = 0; i < count; i++) {
             particles.push(new Particle());
         }
-
     }
 
     function animateParticles() {
-
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         particles.forEach(p => {
@@ -305,19 +183,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         requestAnimationFrame(animateParticles);
-
     }
 
     let resizeTimeout;
 
     window.addEventListener('resize', () => {
-
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(resizeCanvas, 150);
-
     });
 
-    // Use requestIdleCallback for initial setup if available
+    // Initialize
     if ('requestIdleCallback' in window) {
         requestIdleCallback(() => {
             resizeCanvas();
