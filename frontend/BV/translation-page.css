@@ -127,6 +127,23 @@ body.translation-page .translate-btn:hover {
     animation: buttonGlow 2s ease-in-out infinite !important;
 }
 
+/* Optimize animations for performance */
+@media (prefers-reduced-motion: reduce) {
+    body.translation-page * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* GPU acceleration */
+body.translation-page .scroll-container,
+body.translation-page .chakra-layer,
+body.translation-page button {
+    transform: translateZ(0) !important;
+    will-change: auto !important;
+}
+
 /* Loading state animation */
 body.translation-page button[type="submit"]:disabled,
 body.translation-page .translate-btn:disabled {
@@ -196,6 +213,40 @@ body.translation-page {
     color: #2c1b18 !important;
     margin: 0 !important;
     padding: 0 !important;
+}
+
+/* PERFORMANCE OPTIMIZATIONS */
+
+/* Optimize chakra animation */
+body.translation-page .chakra-layer {
+    width: 100vmin !important;
+    height: 100vmin !important;
+    opacity: 0.5 !important;
+    animation-duration: 300s !important;
+    transform: translate(-50%, -50%) !important;
+}
+
+/* Disable heavy effects */
+body.translation-page .chakra-layer::before,
+body.translation-page .chakra-layer::after {
+    display: none !important;
+}
+
+/* Reduce particles */
+body.translation-page #dustCanvas {
+    opacity: 0.3 !important;
+}
+
+/* Optimize scroll container */
+body.translation-page .scroll-container {
+    will-change: auto !important;
+    transform: translateZ(0) !important;
+}
+
+/* Disable multiverse effects on translation page */
+body.translation-page .multiverse-flash,
+body.translation-page .dimension-rift {
+    display: none !important;
 }
 
 /* Force form card visibility */
