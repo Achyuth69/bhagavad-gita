@@ -48,6 +48,30 @@ body.translation-page .navbar {
     backdrop-filter: none !important;
 }
 
+body.translation-page .navbar .container {
+    padding-left: 20px !important;
+    padding-right: 40px !important;
+}
+
+body.translation-page .navbar .nav-content {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+}
+
+body.translation-page .navbar .logo {
+    margin-left: 0 !important;
+}
+
+body.translation-page .navbar .right-section {
+    margin-left: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 15px !important;
+}
+
 body.translation-page .navbar.scrolled {
     background: rgba(0, 0, 0, 0.3) !important;
     backdrop-filter: blur(10px) !important;
@@ -321,29 +345,194 @@ input:focus, select:focus {
 button {
     margin-top: 10px;
     margin-bottom: 4px;
-    padding: 12px 24px;
-    background: transparent;
-    border: 2px solid var(--parchment-ink);
+    padding: 14px 40px;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.05));
+    border: 2px solid var(--gold);
     font-family: var(--font-title);
     font-weight: 700;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     text-transform: uppercase;
     cursor: pointer;
-    transition: all 0.3s ease;
-    letter-spacing: 1px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    letter-spacing: 2px;
+    position: relative;
+    overflow: hidden;
+    color: var(--parchment-ink);
+    
+    /* Hexagonal shape */
+    clip-path: polygon(
+        10% 0%, 90% 0%, 
+        100% 50%, 
+        90% 100%, 10% 100%, 
+        0% 50%
+    );
+    
+    box-shadow: 
+        0 0 20px rgba(212, 175, 55, 0.3),
+        inset 0 0 20px rgba(212, 175, 55, 0.1);
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--gold-glow), transparent);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+button:hover::before {
+    width: 300px;
+    height: 300px;
 }
 
 button:hover {
-    background: var(--parchment-ink);
-    color: var(--gold);
-    box-shadow: 0 5px 15px rgba(44, 27, 24, 0.3);
+    background: linear-gradient(135deg, var(--gold), #b8941f);
+    color: white;
+    transform: scale(1.05) translateY(-3px);
+    box-shadow: 
+        0 10px 30px rgba(212, 175, 55, 0.5),
+        0 0 40px rgba(212, 175, 55, 0.4),
+        inset 0 0 30px rgba(255, 255, 255, 0.2);
     letter-spacing: 3px;
+}
+
+button:active {
+    transform: scale(0.98) translateY(0);
 }
 
 button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
     border-color: var(--input-border);
+    transform: none;
+}
+
+/* Listen Button - Star/Burst Shape */
+.listen-btn {
+    margin-top: 20px;
+    padding: 20px 60px;
+    background: linear-gradient(135deg, #0a0e27 0%, #1a1a3e 50%, #2d1b69 100%);
+    border: 3px solid var(--gold);
+    color: var(--gold);
+    font-family: var(--font-title);
+    font-weight: 700;
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    letter-spacing: 2px;
+    position: relative;
+    overflow: hidden;
+    
+    /* Star/Burst shape - 16 points for smooth curves */
+    clip-path: polygon(
+        50% 0%,
+        61% 35%,
+        98% 35%,
+        68% 57%,
+        79% 91%,
+        50% 70%,
+        21% 91%,
+        32% 57%,
+        2% 35%,
+        39% 35%
+    );
+    
+    box-shadow: 
+        0 0 40px rgba(212, 175, 55, 0.6),
+        0 0 80px rgba(212, 175, 55, 0.4),
+        inset 0 0 40px rgba(212, 175, 55, 0.15);
+    
+    animation: listenPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes listenPulse {
+    0%, 100% {
+        box-shadow: 
+            0 0 40px rgba(212, 175, 55, 0.6),
+            0 0 80px rgba(212, 175, 55, 0.4),
+            inset 0 0 40px rgba(212, 175, 55, 0.15);
+    }
+    50% {
+        box-shadow: 
+            0 0 60px rgba(212, 175, 55, 0.8),
+            0 0 120px rgba(212, 175, 55, 0.6),
+            inset 0 0 60px rgba(212, 175, 55, 0.25);
+    }
+}
+
+.listen-btn::before {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 300%;
+    height: 300%;
+    background: conic-gradient(
+        from 0deg,
+        transparent,
+        rgba(212, 175, 55, 0.4),
+        transparent 30%
+    );
+    animation: listenRotate 4s linear infinite;
+}
+
+@keyframes listenRotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.listen-btn::after {
+    content: '🎵';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    font-size: 3.5rem;
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.8));
+}
+
+.listen-btn:hover {
+    background: linear-gradient(135deg, var(--gold), #ffd700, #ffed4e);
+    color: #0a0e27;
+    transform: scale(1.15);
+    border-color: #ffd700;
+    box-shadow: 
+        0 0 70px rgba(255, 215, 0, 0.9),
+        0 0 140px rgba(255, 215, 0, 0.7),
+        inset 0 0 60px rgba(255, 255, 255, 0.4);
+    letter-spacing: 4px;
+}
+
+.listen-btn:hover::after {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.listen-btn:active {
+    transform: scale(1.08);
+}
+
+.listen-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    animation: none;
+}
+
+.listen-btn:disabled::before {
+    animation: none;
 }
 
 /* 5. Output Text & 6. Audio Button */

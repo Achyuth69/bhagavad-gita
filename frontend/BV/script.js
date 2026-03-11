@@ -3,8 +3,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('divineForm');
     const outputSection = document.getElementById('outputSection');
     const outputText = document.getElementById('outputText');
+    const listenBtn = document.getElementById('listenBtn');
 
     let currentMessage = "";
+    let currentShloka = "";
+    let currentLanguage = "";
+    let currentAudioUrl = "";
     let portalMode = false;
 
     // Multiverse flash layer
@@ -18,6 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const name = document.getElementById('userName').value.trim();
         const lang = document.getElementById('userLanguage').value || 'english';
 
+        currentShloka = name;
+        currentLanguage = lang;
+
         if (!name) {
             alert('Please enter a Sanskrit shloka');
             return;
@@ -28,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Show loading state
         outputSection.style.visibility = 'visible';
         outputText.textContent = 'Translating...';
+        listenBtn.style.display = 'none';
 
         try {
             console.log('Sending request to:', `${API_BASE_URL}/get-meaning`);
@@ -53,10 +61,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (data && data.text) {
                 currentMessage = data.text;
+                currentAudioUrl = data.audio_url || "";
+                
+                // Show listen button if translation is successful
+                listenBtn.style.display = 'block';
             } else if (data && data.error) {
                 currentMessage = `Error: ${data.error}`;
+                listenBtn.style.display = 'none';
             } else {
                 currentMessage = "Translation not found. Please check the shloka text.";
+                listenBtn.style.display = 'none';
             }
 
         } catch (err) {
@@ -254,5 +268,106 @@ document.addEventListener('DOMContentLoaded', () => {
             nav.classList.remove("scrolled");
         }
     });
+
+    // Listen button functionality
+    listenBtn.addEventListener('click', async () => {
+        if (!currentShloka || !currentLanguage) {
+            alert('Please translate a shloka first');
+            return;
+        }
+
+        listenBtn.disabled = true;
+        listenBtn.textContent = '🔊 Playing...';
+
+        try {
+            // Step 1: Read the Sanskrit Shloka
+            const shlokaAudio = await textToSpeech(currentShloka, 'hi'); // Sanskrit in Hindi voice
+            await playAudio(shlokaAudio);
+
+            // Step 2: Wait 2 seconds
+            await sleep(2000);
+
+            // Step 3: Read the translated meaning
+            if (currentAudioUrl) {
+                // Use backend-generated audio if available
+                const meaningAudio = new Audio(`${API_BASE_URL}${currentAudioUrl}`);
+                await playAudio(meaningAudio);
+            } else {
+                // Fallback to browser TTS
+                const meaningAudio = await textToSpeech(currentMessage, currentLanguage);
+                await playAudio(meaningAudio);
+            }
+
+        } catch (err) {
+            console.error('Audio playback error:', err);
+            alert('Error playing audio. Please try again.');
+        } finally {
+            listenBtn.disabled = false;
+            listenBtn.textContent = '🔊 Listen';
+        }
+    });
+
+    // Helper function to create audio from text using Web Speech API
+    function textToSpeech(text, lang) {
+        return new Promise((resolve, reject) => {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                
+                // Map language codes
+                const langMap = {
+                    'hindi': 'hi-IN',
+                    'english': 'en-US',
+                    'telugu': 'te-IN',
+                    'tamil': 'ta-IN',
+                    'kannada': 'kn-IN',
+                    'malayalam': 'ml-IN',
+                    'marathi': 'mr-IN',
+                    'bengali': 'bn-IN',
+                    'gujarati': 'gu-IN',
+                    'urdu': 'ur-PK',
+                    'spanish': 'es-ES',
+                    'french': 'fr-FR',
+                    'german': 'de-DE',
+                    'italian': 'it-IT',
+                    'portuguese': 'pt-PT',
+                    'russian': 'ru-RU',
+                    'chinese_simplified': 'zh-CN',
+                    'japanese': 'ja-JP',
+                    'korean': 'ko-KR',
+                    'arabic': 'ar-SA'
+                };
+
+                utterance.lang = langMap[lang] || lang || 'en-US';
+                utterance.rate = 0.9;
+                utterance.pitch = 1;
+
+                utterance.onend = () => resolve(utterance);
+                utterance.onerror = (err) => reject(err);
+
+                window.speechSynthesis.speak(utterance);
+            } else {
+                reject(new Error('Speech synthesis not supported'));
+            }
+        });
+    }
+
+    // Helper function to play audio element
+    function playAudio(audio) {
+        return new Promise((resolve, reject) => {
+            if (audio instanceof Audio) {
+                audio.onended = resolve;
+                audio.onerror = reject;
+                audio.play().catch(reject);
+            } else {
+                // For SpeechSynthesisUtterance, it's already playing
+                resolve();
+            }
+        });
+    }
+
+    // Helper function to sleep
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
 
 });
