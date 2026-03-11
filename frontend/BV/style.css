@@ -287,65 +287,71 @@ body {
 
 /* 4. Transparent Form */
 .form-card {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    align-items: center;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    align-items: center !important;
 }
 
 input, select {
-    width: 90%;
-    padding: 8px;
-    background: var(--input-bg);
-    border: none;
-    border-bottom: 2px solid var(--input-border);
-    font-family: var(--font-body);
-    font-size: 0.9rem;
-    color: var(--parchment-ink);
-    font-weight: 700;
-    outline: none;
-    text-align: center;
-    transition: all 0.3s ease;
-    border-radius: 4px 4px 0 0;
+    width: 90% !important;
+    padding: 8px !important;
+    background: var(--input-bg) !important;
+    border: none !important;
+    border-bottom: 2px solid var(--input-border) !important;
+    font-family: var(--font-body) !important;
+    font-size: 0.9rem !important;
+    color: var(--parchment-ink) !important;
+    font-weight: 700 !important;
+    outline: none !important;
+    text-align: center !important;
+    transition: all 0.3s ease !important;
+    border-radius: 4px 4px 0 0 !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 input::placeholder {
-    color: var(--parchment-ink-dim);
-    font-style: italic;
+    color: var(--parchment-ink-dim) !important;
+    font-style: italic !important;
 }
 
 input:focus, select:focus {
-    background: rgba(44, 27, 24, 0.08);
-    border-bottom-color: var(--gold);
+    background: rgba(44, 27, 24, 0.08) !important;
+    border-bottom-color: var(--gold) !important;
 }
 
 button {
-    margin-top: 10px;
-    margin-bottom: 4px;
-    padding: 12px 24px;
-    background: transparent;
-    border: 2px solid var(--parchment-ink);
-    font-family: var(--font-title);
-    font-weight: 700;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    letter-spacing: 1px;
+    margin-top: 10px !important;
+    margin-bottom: 4px !important;
+    padding: 12px 24px !important;
+    background: transparent !important;
+    border: 2px solid var(--parchment-ink) !important;
+    font-family: var(--font-title) !important;
+    font-weight: 700 !important;
+    font-size: 0.85rem !important;
+    text-transform: uppercase !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    letter-spacing: 1px !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 button:hover {
-    background: var(--parchment-ink);
-    color: var(--gold);
-    box-shadow: 0 5px 15px rgba(44, 27, 24, 0.3);
-    letter-spacing: 3px;
+    background: var(--parchment-ink) !important;
+    color: var(--gold) !important;
+    box-shadow: 0 5px 15px rgba(44, 27, 24, 0.3) !important;
+    letter-spacing: 3px !important;
 }
 
 button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    border-color: var(--input-border);
+    opacity: 0.5 !important;
+    cursor: not-allowed !important;
+    border-color: var(--input-border) !important;
 }
 
 /* 5. Output Text & 6. Audio Button */
