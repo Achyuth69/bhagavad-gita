@@ -63,19 +63,23 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error("API error:", err);
             
             if (err.message.includes('Failed to fetch') || err.message.includes('NetworkError')) {
-                currentMessage = `⚠️ Cannot connect to backend server.\n\n` +
-                    `The backend API at ${API_BASE_URL} is not responding.\n\n` +
-                    `Possible solutions:\n` +
-                    `1. Check if the backend is deployed on Render\n` +
-                    `2. Run backend locally: cd backend && uvicorn backend:app --reload\n` +
-                    `3. Update API_BASE_URL in config.js`;
+                currentMessage = `⚠️ BACKEND NOT RUNNING\n\n` +
+                    `Cannot connect to: ${API_BASE_URL}\n\n` +
+                    `TO FIX THIS:\n` +
+                    `1. Open a terminal/command prompt\n` +
+                    `2. Run: cd backend\n` +
+                    `3. Run: uvicorn backend:app --reload\n\n` +
+                    `OR double-click START_ALL.bat\n\n` +
+                    `Then refresh this page and try again.`;
             } else if (err.message.includes('404')) {
-                currentMessage = `⚠️ API endpoint not found (404).\n\n` +
-                    `The endpoint ${API_BASE_URL}/get-meaning does not exist.\n` +
-                    `Please check the backend deployment.`;
+                currentMessage = `⚠️ API ENDPOINT NOT FOUND (404)\n\n` +
+                    `The endpoint ${API_BASE_URL}/get-meaning does not exist.\n\n` +
+                    `This means the backend is running but the API route is wrong.\n` +
+                    `Please check backend/backend.py`;
             } else {
-                currentMessage = `⚠️ Translation error: ${err.message}\n\n` +
-                    `Please check the browser console for more details.`;
+                currentMessage = `⚠️ TRANSLATION ERROR\n\n` +
+                    `${err.message}\n\n` +
+                    `Check the browser console (F12) for details.`;
             }
         }
 
