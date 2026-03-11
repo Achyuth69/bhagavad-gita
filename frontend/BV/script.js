@@ -61,7 +61,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } catch (err) {
             console.error("API error:", err);
-            currentMessage = `Unable to fetch translation: ${err.message}. Please check your connection and try again.`;
+            
+            if (err.message.includes('Failed to fetch') || err.message.includes('NetworkError')) {
+                currentMessage = `⚠️ Cannot connect to backend server.\n\n` +
+                    `The backend API at ${API_BASE_URL} is not responding.\n\n` +
+                    `Possible solutions:\n` +
+                    `1. Check if the backend is deployed on Render\n` +
+                    `2. Run backend locally: cd backend && uvicorn backend:app --reload\n` +
+                    `3. Update API_BASE_URL in config.js`;
+            } else if (err.message.includes('404')) {
+                currentMessage = `⚠️ API endpoint not found (404).\n\n` +
+                    `The endpoint ${API_BASE_URL}/get-meaning does not exist.\n` +
+                    `Please check the backend deployment.`;
+            } else {
+                currentMessage = `⚠️ Translation error: ${err.message}\n\n` +
+                    `Please check the browser console for more details.`;
+            }
         }
 
         outputSection.style.visibility = 'visible';
