@@ -1,0 +1,47 @@
+# Git files
+.git
+.gitignore
+
+# Python cache
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info
+dist
+build
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Documentation
+*.md
+!README.md
+
+# Frontend (not needed in backend container)
+frontend/
+
+# Audio files (generated at runtime)
+backend/audio/*.mp3
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Deployment files
+render.yaml
+START_ALL.bat
