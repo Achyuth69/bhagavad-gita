@@ -1,0 +1,145 @@
+/* ===== PERFORMANCE OPTIMIZER CSS ===== */
+/* GPU Acceleration and Performance Optimizations */
+
+/* Hardware Acceleration for Smooth Animations */
+.navbar,
+.scroll-container,
+.hamburger,
+.right-section,
+.chapter-card,
+.card,
+.hero-video,
+.loader-chakra,
+.divine-cursor {
+    will-change: transform;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    perspective: 1000px;
+    -webkit-perspective: 1000px;
+}
+
+/* Optimize Animations */
+@media (prefers-reduced-motion: no-preference) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Reduce Repaints */
+.scroll-container,
+.chapter-card,
+.card {
+    contain: layout style paint;
+}
+
+/* GPU Accelerated Transforms */
+.navbar {
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+}
+
+/* Optimize Images */
+img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+/* Optimize Fonts */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Reduce Paint Areas */
+.navbar,
+.scroll-container,
+.card,
+.chapter-card,
+.hero {
+    isolation: isolate;
+}
+
+/* Optimize Scrolling */
+* {
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Reduce Shadows on Mobile */
+@media (max-width: 768px) {
+    .card,
+    .chapter-card,
+    .navbar.scrolled {
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08) !important;
+    }
+}
+
+/* Optimize Canvas */
+canvas {
+    image-rendering: pixelated;
+}
+
+/* Reduce Blur Effects on Mobile */
+@media (max-width: 768px) {
+    .navbar.scrolled {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+    }
+}
+
+/* Reduce Repaints on Scroll */
+.navbar {
+    contain: layout style;
+}
+
+/* Optimize Video */
+video {
+    object-fit: cover;
+    transform: translateZ(0);
+}
+
+/* Reduce Motion for Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Optimize Critical Rendering Path */
+.navbar,
+.scroll-container,
+.hero {
+    contain: layout style;
+}
+
+/* Reduce Composite Layers */
+.chapter-card:hover,
+.card:hover {
+    will-change: transform;
+}
+
+/* Remove will-change after animation */
+.chapter-card,
+.card {
+    will-change: auto;
+}
+
+/* Optimize Particle Canvas */
+#dustCanvas {
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}

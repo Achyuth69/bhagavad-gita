@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend Test - Bhagavad Gita</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #667eea;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .status {
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-weight: bold;
+            text-align: center;
+        }
+        .status.checking {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        .status.success {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        .status.error {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        .instructions {
+            background: #f3f4f6;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .instructions h3 {
+            color: #374151;
+            margin-bottom: 15px;
+        }
+        .instructions ol {
+            margin-left: 20px;
+        }
+        .instructions li {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+        .code {
+            background: #1f2937;
+            color: #10b981;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin: 10px 0;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        .test-section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+        }
+        .result {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            background: #f9fafb;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🕉️ Bhagavad Gita Backend Test</h1>
+        
+        <div id="status" class="status checking">
+            🔍 Checking backend status...
+        </div>
+
+        <div class="instructions">
+            <h3>📋 How to Start the Backend:</h3>
+            <ol>
+                <li><strong>Install Dependencies:</strong>
+                    <div class="code">pip install -r requirements.txt</div>
+                </li>
+                <li><strong>Start Backend Server:</strong>
+                    <div class="code">cd backend<br>uvicorn backend:app --reload --host 0.0.0.0 --port 8000</div>
+                    <p><em>Or simply double-click: <strong>START_ALL.bat</strong></em></p>
+                </li>
+                <li><strong>Verify Backend:</strong>
+                    <p>Open <a href="http://127.0.0.1:8000/docs" target="_blank">http://127.0.0.1:8000/docs</a></p>
+                </li>
+            </ol>
+        </div>
+
+        <div class="test-section">
+            <h3>🧪 Test Translation API</h3>
+            <button onclick="testAPI()">Test API Connection</button>
+            <button onclick="testTranslation()">Test Translation (Chapter 1, Verse 1)</button>
+            <div id="result" class="result" style="display:none;"></div>
+        </div>
+
+        <div class="instructions">
+            <h3>🚀 After Backend is Running:</h3>
+            <ol>
+                <li>Make sure the status above shows "✅ Backend is Running"</li>
+                <li>Open <a href="frontend/BV/translation.html">translation.html</a></li>
+                <li>Paste a Sanskrit shloka and translate</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE_URL = "http://127.0.0.1:8000";
+        const statusDiv = document.getElementById('status');
+        const resultDiv = document.getElementById('result');
+
+        async function checkBackend() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/docs`);
+                if (response.ok) {
+                    statusDiv.className = 'status success';
+                    statusDiv.innerHTML = '✅ Backend is Running!<br>API URL: ' + API_BASE_URL;
+                    return true;
+                }
+            } catch (err) {
+                statusDiv.className = 'status error';
+                statusDiv.innerHTML = '❌ Backend is NOT Running<br>Please start the backend server first';
+                return false;
+            }
+        }
+
+        async function testAPI() {
+            resultDiv.style.display = 'block';
+            resultDiv.textContent = 'Testing API connection...';
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/docs`);
+                if (response.ok) {
+                    resultDiv.textContent = '✅ API Connection Successful!\n\n' +
+                        'Backend URL: ' + API_BASE_URL + '\n' +
+                        'Status: ' + response.status + ' ' + response.statusText + '\n\n' +
+                        'You can now use the translation page!';
+                } else {
+                    resultDiv.textContent = '❌ API returned error: ' + response.status;
+                }
+            } catch (err) {
+                resultDiv.textContent = '❌ Cannot connect to backend:\n\n' + err.message + '\n\n' +
+                    'Make sure the backend is running on port 8000';
+            }
+        }
+
+        async function testTranslation() {
+            resultDiv.style.display = 'block';
+            resultDiv.textContent = 'Testing translation...';
+            
+            const testShloka = "धृतराष्ट्र उवाच | धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः | मामकाः पाण्डवाश्चैव किमकुर्वत सञ्जय ||";
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/get-meaning`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        shloka: testShloka,
+                        language: 'english'
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (response.ok && data.text) {
+                    resultDiv.textContent = '✅ Translation Successful!\n\n' +
+                        'Shloka: ' + testShloka + '\n\n' +
+                        'Translation:\n' + data.text;
+                } else if (data.error) {
+                    resultDiv.textContent = '⚠️ API Error:\n\n' + data.error;
+                } else {
+                    resultDiv.textContent = '❌ Unexpected response:\n\n' + JSON.stringify(data, null, 2);
+                }
+            } catch (err) {
+                resultDiv.textContent = '❌ Translation failed:\n\n' + err.message + '\n\n' +
+                    'Make sure the backend is running and try again.';
+            }
+        }
+
+        // Auto-check on page load
+        checkBackend();
+        
+        // Re-check every 5 seconds
+        setInterval(checkBackend, 5000);
+    </script>
+</body>
+</html>
