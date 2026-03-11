@@ -3,6 +3,37 @@
    This file contains all styles needed for translation.html
    ============================================ */
 
+/* CRITICAL: Override ALL input hiding rules */
+body.translation-page input,
+body.translation-page input[type="text"],
+body.translation-page input#userName,
+body.translation-page form input,
+body.translation-page .form-card input {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    width: 90% !important;
+    max-width: 500px !important;
+    padding: 12px 15px !important;
+    background: rgba(44, 27, 24, 0.05) !important;
+    border: none !important;
+    border-bottom: 2px solid rgba(44, 27, 24, 0.3) !important;
+    font-family: 'MedievalSharp', cursive !important;
+    font-size: 1rem !important;
+    color: #2c1b18 !important;
+    font-weight: 700 !important;
+    outline: none !important;
+    text-align: center !important;
+    transition: all 0.3s ease !important;
+    border-radius: 4px 4px 0 0 !important;
+    box-sizing: border-box !important;
+    height: auto !important;
+    min-height: 44px !important;
+    z-index: 100 !important;
+    margin: 0 auto !important;
+}
+
 /* Force translation page body styles */
 body.translation-page {
     width: 100vw !important;
@@ -35,9 +66,16 @@ body.translation-page .form-card {
     position: relative !important;
 }
 
-/* Force input field visibility */
+/* CRITICAL: Override ALL input hiding rules */
+body.translation-page input,
 body.translation-page input[type="text"],
-body.translation-page #userName {
+body.translation-page input#userName,
+body.translation-page form input,
+body.translation-page .form-card input {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
     width: 90% !important;
     max-width: 500px !important;
     padding: 12px 15px !important;
@@ -52,20 +90,21 @@ body.translation-page #userName {
     text-align: center !important;
     transition: all 0.3s ease !important;
     border-radius: 4px 4px 0 0 !important;
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
     box-sizing: border-box !important;
+    height: auto !important;
+    min-height: 44px !important;
+    z-index: 100 !important;
+    margin: 0 auto !important;
 }
 
-body.translation-page input[type="text"]::placeholder,
-body.translation-page #userName::placeholder {
+body.translation-page input::placeholder,
+body.translation-page input#userName::placeholder {
     color: rgba(44, 27, 24, 0.5) !important;
     font-style: italic !important;
 }
 
-body.translation-page input[type="text"]:focus,
-body.translation-page #userName:focus {
+body.translation-page input:focus,
+body.translation-page input#userName:focus {
     background: rgba(44, 27, 24, 0.08) !important;
     border-bottom-color: #d4af37 !important;
 }
